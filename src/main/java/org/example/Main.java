@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         List<Task> tasks = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
         while (true) {
             System.out.println("Введите команду:");
             String command = scanner.nextLine();
