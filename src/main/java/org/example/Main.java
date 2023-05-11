@@ -1,48 +1,56 @@
 package org.example;
 
-import java.util.Date;
-import java.util.Scanner;
 import java.util.ArrayList;
-
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
-    static ArrayList<Task> todolist = new ArrayList<>();
-
     public static void main(String[] args) {
-        Date date = new Date();
-
+        List<Task> tasks = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
         while (true) {
-            Scanner console = new Scanner(System.in);
-            System.out.println("Привет! Что хочешь сделать? (Создать задачу/Показать задачи/Удалить задачу/Выход)");
-            String a = console.nextLine().toLowerCase();
-            if (a.equalsIgnoreCase("создать задачу")) {
-                Scanner console1 = new Scanner(System.in);
-                System.out.println("Наименование задачи: ");
-                String name = console1.nextLine();
-                Scanner console2 = new Scanner(System.in);
-                System.out.println("Описание задачи: ");
-                String description = console2.nextLine();
-                Task task = new Task(name, description);
-                todolist.add(task);
-            }
-            else if(a.equalsIgnoreCase("показать задачи")) {
-                for(int i = 0; i < todolist.size(); i++) {
-                    System.out.println("Задача №:" + (i + 1) +"\n " + todolist.get(i).getName() +"\n"+ date);
-                }
-            }
-            else if(a.equalsIgnoreCase("удалить задачу")) {
-                Scanner console3 = new Scanner(System.in);
-                System.out.println("Номер задачи: ");
-                int id = console3.nextInt();
-                todolist.remove(id-1);
-            }
-            else if(a.equalsIgnoreCase("выход")) {
-                System.err.println("До свидания!");
-                System.exit(0);
-            }
-            else {
-                System.out.println("Неверная команда");
+            System.out.println("Введите команду:");
+            String command = scanner.nextLine();
+            if (command.equals("create")) {
+                createTask(tasks, scanner);
+            } else if (command.equals("list")) {
+                listTasks(tasks);
+            } else if (command.equals("delete")) {
+                deleteTask(tasks, scanner);
+            } else {
+                System.out.println("Неизвестная команда");
             }
         }
     }
+
+    private static void createTask(List<Task> tasks, Scanner scanner) {
+        System.out.println("Введите название задачи:");
+        String name = scanner.nextLine();
+        System.out.println("Введите описание задачи:");
+        String description = scanner.nextLine();
+        Task task = new Task(name, description);
+        tasks.add(task);
+        System.out.println("Задача создана");
+    }
+
+    private static void listTasks(List<Task> tasks) {
+        System.out.println("Список задач:");
+        for (Task task : tasks) {
+            System.out.println(task.getName());
+        }
+    }
+
+    private static void deleteTask(List<Task> tasks, Scanner scanner) {
+        System.out.println("Введите название задачи:");
+        String name = scanner.nextLine();
+        for (Task task : tasks) {
+            if (task.getName().equals(name)) {
+                tasks.remove(task);
+                System.out.println("Задача удалена");
+                return;
+            }
+        }
+        System.out.println("Задача не найдена");
+    }
 }
+

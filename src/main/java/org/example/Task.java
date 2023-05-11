@@ -1,17 +1,8 @@
 package org.example;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-public class Task {
-    private String name;
-    private String description;
-    private LocalDateTime date;
-    private int duration;
-    private String organizer;
-    private List<String> participants;
-    private String city;
-
+    class Task {
+        private String name;
+        private String description;
 
         public Task(String name, String description) {
             this.name = name;
@@ -26,6 +17,8 @@ public class Task {
             return description;
         }
     }
+
+
 
     /** public Task(String name, String description) {
         this.name = name;
