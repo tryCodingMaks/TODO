@@ -7,15 +7,15 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         List<Task> tasks = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+        Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Введите команду:");
-            String command = scanner.nextLine();
-            if (command.equals("create")) {
+            String command = scanner.nextLine().toLowerCase();
+            if (command.equalsIgnoreCase("Создать задачу")) {
                 createTask(tasks, scanner);
-            } else if (command.equals("list")) {
+            } else if (command.equalsIgnoreCase("Список задач")) {
                 listTasks(tasks);
-            } else if (command.equals("delete")) {
+            } else if (command.equalsIgnoreCase("Удалить")) {
                 deleteTask(tasks, scanner);
             } else {
                 System.out.println("Неизвестная команда");
